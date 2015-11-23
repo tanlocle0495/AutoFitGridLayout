@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoFitGridLayout">
+        <attr name="columnCount" format="integer"/>
+        <attr name="horizontalSpace" format="dimension"/>
+        <attr name="verticalSpace" format="dimension"/>
+    </declare-styleable>
+
+</resources>

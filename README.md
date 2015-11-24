@@ -68,7 +68,7 @@ In the xml file:
             android:background="@android:color/holo_blue_dark"/>
     </com.liuzhuang.afgridlayout.AutoFitGridLayout>
  
-And the effect:
+And the original effect:
 
 ![before](./before.png)
 

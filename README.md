@@ -7,44 +7,74 @@ Just copy the class `AutoFitGridLayout.java` as your custom widget.
 In the xml file:
 
     <com.liuzhuang.afgridlayout.AutoFitGridLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="24dp"
+        android:paddingTop="32dp"
+        android:background="#263238"
         app:columnCount="2"
         app:horizontalSpace="4.5dp"
-        app:verticalSpace="9dp">
-        <View
+        app:verticalSpace="4.5dp">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="1"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
             android:background="@android:color/darker_gray"/>
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="2"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_bright"/>
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="3"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_dark"/>
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="4"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
             android:background="@android:color/darker_gray"/>
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="5"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_bright"/>
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:text="6"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_dark"/>
     </com.liuzhuang.afgridlayout.AutoFitGridLayout>
-    
+ 
 And the effect:
 
-![effect](./effect.png)
+![before](./before.png)
+
+After setting number 1 & 3 to be `GONE`, the effect is:
+
+![after](./after.png)
 
 # License
 

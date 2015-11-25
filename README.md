@@ -2,7 +2,7 @@
 It is a layout like GridLayout. But children in it will fill the column.
 
 # How to Use?
-Just copy the class `AutoFitGridLayout.java` as your custom widget.
+Just copy the class `AutoFitGridLayout.java` and `attr.xml` in afgridayout folder to your dir.
 
 In the xml file:
 

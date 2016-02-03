@@ -2,7 +2,7 @@ AnimateFilterGridLayout
 ===================
 It is a layout like GridLayout. But children in it will fill the column. And you can filter your items with animation.
 
-![enter image description here](https://lh6.googleusercontent.com/-yShdlWEbT48/VrIlB4vnfJI/AAAAAAAACHA/W5YjnUpnXFA/w280-h477-no/afgl.gif)
+![enter image description here](https://lh4.googleusercontent.com/-Nuv3lfv7bfg/VrIlmOqGo6I/AAAAAAAACHo/PsXzih4IbZ4/w280-h477-no/afgl.gif)
 
 U can check the sample app [here](https://github.com/GIGAMOLE/AnimateFilterGridLayout/tree/master/app).
 

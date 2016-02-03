@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AutoFitGridLayout.iml" filepath="$PROJECT_DIR$/AutoFitGridLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AnimateFilterGridLayout.iml" filepath="$PROJECT_DIR$/AnimateFilterGridLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/afgridlayout/afgridlayout.iml" filepath="$PROJECT_DIR$/afgridlayout/afgridlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

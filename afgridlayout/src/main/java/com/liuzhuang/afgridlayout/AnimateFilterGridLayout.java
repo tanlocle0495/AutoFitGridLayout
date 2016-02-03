@@ -98,7 +98,8 @@ public class AnimateFilterGridLayout extends ViewGroup {
                     new OnClickListener() {
                         @Override
                         public void onClick(final View v) {
-                            mOnItemClickListener.onItemClick(null, child, finalIndex, finalIndex);
+                            if (mOnItemClickListener != null)
+                                mOnItemClickListener.onItemClick(null, child, finalIndex, finalIndex);
                         }
                     }
             );
@@ -474,11 +475,11 @@ public class AnimateFilterGridLayout extends ViewGroup {
     }
 
     public interface OnFilterListener {
-        public void onFilterStart();
+        void onFilterStart();
 
-        public void onFilterFinish();
+        void onFilterFinish();
 
-        public ArrayList<?> onFilterSet(
+        ArrayList<?> onFilterSet(
                 final ArrayList<?> originalItems,
                 final ArrayList<?> lastItems,
                 final ArrayList<Integer> positionsToAdd,

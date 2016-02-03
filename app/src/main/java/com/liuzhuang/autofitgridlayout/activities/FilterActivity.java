@@ -1,4 +1,4 @@
-package com.liuzhuang.autofitgridlayout;
+package com.liuzhuang.autofitgridlayout.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,9 @@ import android.widget.CheckBox;
 import android.widget.ScrollView;
 
 import com.liuzhuang.afgridlayout.AnimateFilterGridLayout;
+import com.liuzhuang.autofitgridlayout.R;
+import com.liuzhuang.autofitgridlayout.adapters.ColorsAdapter;
+import com.liuzhuang.autofitgridlayout.data.ColorModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +18,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AnimateFilterGridLayout.OnFilterListener {
+public class FilterActivity extends AppCompatActivity implements View.OnClickListener, AnimateFilterGridLayout.OnFilterListener {
 
     private View mBtnRandom;
 
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_filter);
 
         initUI();
         setUI();

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:showDividers="middle">
+
+    <Button
+        android:id="@+id/btn_random"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/gray"
+        android:text="RANDOM"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:weightSum="3">
+
+        <CheckBox
+            android:id="@+id/cb_filter_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/cb_left_selector"
+            android:button="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="LEFT"
+            android:textColor="@color/white"/>
+
+        <CheckBox
+            android:id="@+id/cb_filter_center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/cb_center_selector"
+            android:button="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="CENTER"
+            android:textColor="@color/white"/>
+
+        <CheckBox
+            android:id="@+id/cb_filter_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cb_right_selector"
+            android:button="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="RIGHT"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp">
+
+        <com.liuzhuang.afgridlayout.AnimateFilterGridLayout
+            android:id="@+id/afgl_colors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:afgl_columnCount="3"
+            app:afgl_horizontalSpace="1dp"
+            app:afgl_verticalSpace="1dp"/>
+
+    </ScrollView>
+
+</LinearLayout>

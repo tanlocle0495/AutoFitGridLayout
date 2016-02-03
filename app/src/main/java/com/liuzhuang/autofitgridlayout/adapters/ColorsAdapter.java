@@ -1,4 +1,4 @@
-package com.liuzhuang.autofitgridlayout;
+package com.liuzhuang.autofitgridlayout.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.liuzhuang.afgridlayout.AnimateFilterGridLayout;
+import com.liuzhuang.autofitgridlayout.R;
+import com.liuzhuang.autofitgridlayout.data.ColorModel;
 
 import java.util.ArrayList;
 

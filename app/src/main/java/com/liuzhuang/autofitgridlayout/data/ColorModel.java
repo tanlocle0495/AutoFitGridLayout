@@ -1,4 +1,4 @@
-package com.liuzhuang.autofitgridlayout;
+package com.liuzhuang.autofitgridlayout.data;
 
 public class ColorModel {
 

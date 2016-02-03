@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AnimateFilterGridLayout</string>
+
+    <string name="monday_title">MO</string>
+    <string name="tuesday_title">TU</string>
+    <string name="wednesday_title">WE</string>
+    <string name="thursday_title">TH</string>
+    <string name="friday_title">FR</string>
+    <string name="saturday_title">SA</string>
+    <string name="sunday_title">MO</string>
 </resources>

@@ -12,17 +12,16 @@ import com.liuzhuang.autofitgridlayout.R;
 
 public class CalendarAdapter extends AnimateCalendarGridLayout.CalendarAdapter {
 
-    private final static int SELECTED_ANIMATION_DURATION = 350;
+    private final static int SELECTED_ANIMATION_DURATION = 300;
     private int mUnselectedTextColor;
 
     public CalendarAdapter(final Context context) {
         super(context);
-
         mUnselectedTextColor = context.getResources().getColor(R.color.gray);
     }
 
     @Override
-    public void onSelected(final View child) {
+    public void onSelected(final View child, final boolean animate) {
         final ViewHolder viewHolder = new ViewHolder(child);
         viewHolder.selected.setAlpha(0f);
         viewHolder.selected.setScaleX(0f);
@@ -32,14 +31,14 @@ public class CalendarAdapter extends AnimateCalendarGridLayout.CalendarAdapter {
                 .alpha(1f)
                 .scaleX(1f)
                 .scaleY(1f)
-                .setDuration(SELECTED_ANIMATION_DURATION)
+                .setDuration(animate ? SELECTED_ANIMATION_DURATION : 0)
                 .withLayer()
                 .start();
         viewHolder.day.setTextColor(Color.BLACK);
     }
 
     @Override
-    public void onUnselected(final View child) {
+    public void onUnselected(final View child, final boolean animate) {
         final ViewHolder viewHolder = new ViewHolder(child);
         viewHolder.selected.setAlpha(1f);
         viewHolder.selected.setScaleX(1f);
@@ -49,14 +48,14 @@ public class CalendarAdapter extends AnimateCalendarGridLayout.CalendarAdapter {
                 .alpha(0f)
                 .scaleX(0f)
                 .scaleY(0f)
-                .setDuration(SELECTED_ANIMATION_DURATION)
+                .setDuration(animate ? SELECTED_ANIMATION_DURATION : 0)
                 .withLayer()
                 .start();
         viewHolder.day.setTextColor(mUnselectedTextColor);
     }
 
     @Override
-    public void onNormal(final View child) {
+    public void onNormal(final View child, final boolean animate) {
         final ViewHolder viewHolder = new ViewHolder(child);
         viewHolder.selected.setAlpha(0f);
         viewHolder.selected.setScaleX(0f);

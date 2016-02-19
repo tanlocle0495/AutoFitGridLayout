@@ -11,6 +11,7 @@ import com.liuzhuang.autofitgridlayout.adapters.CalendarAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by GIGAMOLE on 03.02.2016.
@@ -71,7 +72,7 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
 
     private void refreshDate() {
         mTxtDate.setText(
-                new SimpleDateFormat("d MMMM yyyy").format(mCalendar.getTime()).toUpperCase()
+                new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH).format(mCalendar.getTime()).toUpperCase()
         );
     }
 

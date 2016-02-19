@@ -37,7 +37,8 @@ public class AnimateFilterGridLayout extends ViewGroup {
 
     private OnFilterListener mOnFilterListener;
 
-    private boolean mIsChildrenInflate;
+    private boolean mIsChildrenLayout;
+    private boolean mIsChildrenMeasure;
 
     private boolean mIsFiltering;
     private AdapterView.OnItemClickListener mOnItemClickListener;
@@ -86,6 +87,12 @@ public class AnimateFilterGridLayout extends ViewGroup {
         if (filterAdapter == null)
             throw new NullPointerException("FilterAdapter must be provided");
 
+        mIsChildrenLayout = false;
+        mIsChildrenMeasure = false;
+
+        mChildren.clear();
+        removeAllViews();
+
         mFilterAdapter = filterAdapter;
         final LayoutInflater layoutInflater = LayoutInflater.from(filterAdapter.mContext);
 
@@ -98,18 +105,12 @@ public class AnimateFilterGridLayout extends ViewGroup {
                     new OnClickListener() {
                         @Override
                         public void onClick(final View v) {
-                            if (mOnItemClickListener != null)
-                                mOnItemClickListener.onItemClick(null, child, finalIndex, finalIndex);
+                            mOnItemClickListener.onItemClick(null, child, finalIndex, finalIndex);
                         }
                     }
             );
             children.add(child);
         }
-
-        mIsChildrenInflate = false;
-        mChildren.clear();
-
-        removeAllViews();
 
         for (View child : children)
             addView(child);
@@ -162,6 +163,10 @@ public class AnimateFilterGridLayout extends ViewGroup {
         return mIsFiltering;
     }
 
+    public boolean isChildrenInflate() {
+        return mIsChildrenLayout && mIsChildrenMeasure;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         refreshNotGoneChildList();
@@ -205,6 +210,10 @@ public class AnimateFilterGridLayout extends ViewGroup {
         totalHeight += getPaddingTop() + getPaddingBottom();
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
                 totalHeight);
+
+        synchronized (this) {
+            mIsChildrenMeasure = true;
+        }
     }
 
     @Override
@@ -231,7 +240,7 @@ public class AnimateFilterGridLayout extends ViewGroup {
                         inlineHeight = totalInlineChildHeight;
                     }
 
-                    if (!mIsChildrenInflate)
+                    if (!mIsChildrenLayout)
                         mChildren.add(new Child(child));
                 }
             }
@@ -239,7 +248,9 @@ public class AnimateFilterGridLayout extends ViewGroup {
             lastTop += (inlineHeight + verticalSpace);
         }
 
-        mIsChildrenInflate = true;
+        synchronized (this) {
+            mIsChildrenLayout = true;
+        }
     }
 
     @Override
@@ -475,11 +486,11 @@ public class AnimateFilterGridLayout extends ViewGroup {
     }
 
     public interface OnFilterListener {
-        void onFilterStart();
+        public void onFilterStart();
 
-        void onFilterFinish();
+        public void onFilterFinish();
 
-        ArrayList<?> onFilterSet(
+        public ArrayList<?> onFilterSet(
                 final ArrayList<?> originalItems,
                 final ArrayList<?> lastItems,
                 final ArrayList<Integer> positionsToAdd,

@@ -17,7 +17,7 @@ Just fork and download code and be ready to use it.
 
 Android SDK Version
 =========
-SlideImageView requires a minimum sdk version of 8.
+AnimateFilterGridLayout requires a minimum sdk version of 8.
 
 Sample
 ========

@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -94,7 +95,7 @@ public class AnimateCalendarGridLayout extends ViewGroup {
                     layoutInflater,
                     i
             );
-            child.setVisibility(GONE);
+            child.setVisibility(INVISIBLE);
             child.setEnabled(false);
 
             children.add(child);
@@ -108,15 +109,13 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             child.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    setSelection((Integer) v.getTag());
+                    setSelection((Integer) v.getTag(), true);
                 }
             });
             children.add(child);
         }
 
-        mIsChildrenInflate = false;
         mChildren.clear();
-
         removeAllViews();
 
         for (View child : children)
@@ -132,20 +131,31 @@ public class AnimateCalendarGridLayout extends ViewGroup {
         final int offset = (mDayOfWeekStart < mWeekStart ? (mDayOfWeekStart + mNumDays) : mDayOfWeekStart) - mWeekStart;
         mLastOffset = mOffset;
         mOffset = offset;
-
-        for (int i = 0; i < 7; i++) {
-            if (i < offset)
-                getChildAt(i).setVisibility(INVISIBLE);
-        }
         mLastDayCount = calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 7;
-        for (int i = calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 7; i < getChildCount(); i++)
-            getChildAt(i).setVisibility(INVISIBLE);
 
         mCalendar = calendar;
-        setSelection(calendar.get(Calendar.DAY_OF_MONTH));
+        setSelection(calendar.get(Calendar.DAY_OF_MONTH), false);
+
+        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                for (int i = 0; i < getChildCount(); i++)
+                    mChildren.add(new Child(getChildAt(i)));
+                getViewTreeObserver().removeOnPreDrawListener(this);
+                return false;
+            }
+        });
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                animate(mLastDayCount, true);
+                getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
     }
 
-    public void setSelection(int day) {
+    public void setSelection(int day, final boolean animate) {
         final CalendarAdapter calendarAdapter = getCalendarAdapter();
         final int originalDay = day;
         day += 6;
@@ -162,11 +172,11 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             for (int i = 7; i < getChildCount(); i++) {
                 final View child = getChildAt(i);
                 if (i == calendarAdapter.mSelection)
-                    calendarAdapter.onSelected(child);
+                    calendarAdapter.onSelected(child, animate);
                 else if (i == calendarAdapter.mLastSelection)
-                    calendarAdapter.onUnselected(child);
+                    calendarAdapter.onUnselected(child, animate);
                 else
-                    calendarAdapter.onNormal(child);
+                    calendarAdapter.onNormal(child, animate);
             }
         }
     }
@@ -269,16 +279,11 @@ public class AnimateCalendarGridLayout extends ViewGroup {
                     if (totalInlineChildHeight > inlineHeight) {
                         inlineHeight = totalInlineChildHeight;
                     }
-
-                    if (!mIsChildrenInflate)
-                        mChildren.add(new Child(child));
                 }
             }
             lastLeft = getPaddingLeft();
             lastTop += (inlineHeight + verticalSpace);
         }
-
-        mIsChildrenInflate = true;
     }
 
     @Override
@@ -327,9 +332,9 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             onChangeListener.onChangeStart();
         }
 
-        animate(calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 7);
+        animate(calendar.getActualMaximum(Calendar.DAY_OF_MONTH) + 7, false);
         if (getCalendarAdapter().mSelection > mLastDayCount - 1)
-            setSelection(1);
+            setSelection(1, true);
 
         postDelayed(new Runnable() {
             @Override
@@ -342,7 +347,7 @@ public class AnimateCalendarGridLayout extends ViewGroup {
         }, ANIMATION_DURATION);
     }
 
-    private void animate(final int dayCount) {
+    private void animate(final int dayCount, final boolean isFirstTime) {
         for (int i = 7, j = 0; i < mLastDayCount; i++, j++) {
             final int fromIndex = j + mLastOffset;
             final int toIndex = j + mOffset;
@@ -362,7 +367,7 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             animation.setFillEnabled(true);
             animation.setFillBefore(true);
             animation.setFillAfter(true);
-            animation.setDuration(ANIMATION_DURATION);
+            animation.setDuration(isFirstTime ? 0 : ANIMATION_DURATION);
             animation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(final Animation animation) {
@@ -384,7 +389,7 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             final View child = getChildAt(i);
             if (child.getVisibility() == GONE) {
                 final Animation animation = new AlphaAnimation(0.0f, 1.0f);
-                animation.setDuration(ANIMATION_DURATION);
+                animation.setDuration(isFirstTime ? 0 : ANIMATION_DURATION);
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(final Animation animation) {
@@ -409,7 +414,7 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             final View child = getChildAt(i);
             if (child.getVisibility() == VISIBLE) {
                 final Animation animation = new AlphaAnimation(1.0f, 0.0f);
-                animation.setDuration(ANIMATION_DURATION);
+                animation.setDuration(isFirstTime ? 0 : ANIMATION_DURATION);
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(final Animation animation) {
@@ -444,13 +449,13 @@ public class AnimateCalendarGridLayout extends ViewGroup {
     }
 
     public interface OnChangeListener {
-        void onChangeStart();
+        public void onChangeStart();
 
-        void onChangeFinish();
+        public void onChangeFinish();
     }
 
     public interface OnDateSelectedListener {
-        void onDateSelect(final Calendar calendar);
+        public void onDateSelect(final Calendar calendar);
     }
 
     public static class LayoutParams extends MarginLayoutParams {
@@ -511,11 +516,11 @@ public class AnimateCalendarGridLayout extends ViewGroup {
             mContext = context;
         }
 
-        public abstract void onSelected(final View child);
+        public abstract void onSelected(final View child, final boolean animate);
 
-        public abstract void onUnselected(final View child);
+        public abstract void onUnselected(final View child, final boolean animate);
 
-        public abstract void onNormal(final View child);
+        public abstract void onNormal(final View child, final boolean animate);
 
         public abstract View initChild(final LayoutInflater layoutInflater, final int position);
     }

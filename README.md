@@ -7,7 +7,7 @@ It is a layout like GridLayout. But children in it will fill the column. And you
 
 Filter                     |Calendar
 :-------------------------:|:-------------------------:
-![](https://lh4.googleusercontent.com/-Nuv3lfv7bfg/VrIlmOqGo6I/AAAAAAAACHo/PsXzih4IbZ4/w280-h477-no/afgl.gif)|![](https://lh4.googleusercontent.com/-Qj9SyqLO-UE/VrJMzv0t2QI/AAAAAAAACIs/Tsa2mhIGceo/w280-h477-no/acgl.gif)
+![](https://lh6.googleusercontent.com/-OMVt5Ow2tsE/VsbvbmJOouI/AAAAAAAACLs/aQoAzX5hGYw/w386-h551-no/afgl.gif)|![](https://lh4.googleusercontent.com/-dXoUnGjGLHE/VsbvbtehV3I/AAAAAAAACLs/EqYB6AA5fYI/w396-h552-no/acgl.gif)
 
 U can check the sample app [here](https://github.com/GIGAMOLE/AnimateFilterGridLayout/tree/master/app).
 

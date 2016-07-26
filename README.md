@@ -28,15 +28,9 @@ You must provide the `FilterAdapter` or `CalendarAdapter` and override method on
 
 There are also included `OnFilterListener`.
 
-Getting Help
-======
-
-To report a specific problem or feature request, [open a new issue on Github](https://github.com/DevLight-Mobile-Agency/AnimateFilterCalendarGridLayout/issues/new).
-
 License
 ======
 Apache 2.0 and MIT. See [LICENSE](https://github.com/DevLight-Mobile-Agency/AnimateFilterCalendarGridLayout/blob/master/LICENSE.txt) file for details.
-
 
 Author
 =======

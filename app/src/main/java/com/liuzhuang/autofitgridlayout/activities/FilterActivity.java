@@ -57,9 +57,9 @@ public class FilterActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setUI() {
-        mLeftColor = getResources().getColor(R.color.color_left);
-        mCenterColor = getResources().getColor(R.color.color_center);
-        mRightColor = getResources().getColor(R.color.color_right);
+        mLeftColor = getResources().getColor(R.color.primary);
+        mCenterColor = getResources().getColor(R.color.black);
+        mRightColor = getResources().getColor(R.color.gray);
 
         mBtnRandom.setOnClickListener(this);
         mAnimateFilterGridLayout.setOnFilterListener(this);

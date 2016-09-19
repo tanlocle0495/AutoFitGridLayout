@@ -11,9 +11,9 @@
         android:id="@+id/btn_random"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/gray"
+        android:background="@color/white"
         android:text="RANDOM"
-        android:textColor="@color/white"/>
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@drawable/cb_left_selector"
+            android:background="@color/primary"
             android:button="@null"
             android:clickable="true"
             android:gravity="center"
@@ -44,7 +44,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@drawable/cb_center_selector"
+            android:background="@color/black"
             android:button="@null"
             android:clickable="true"
             android:gravity="center"
@@ -56,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/cb_right_selector"
+            android:background="@color/gray"
             android:button="@null"
             android:clickable="true"
             android:gravity="center"

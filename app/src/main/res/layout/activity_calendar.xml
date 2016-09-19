@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
-            android:background="@color/color_left"
+            android:background="@color/primary"
             android:gravity="center"
             android:text="PREV"
             android:textColor="@color/white"/>
@@ -28,7 +28,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@color/color_center"
+            android:background="@color/black"
             android:gravity="center"
             android:textColor="@color/white"/>
 
@@ -36,7 +36,7 @@
             android:id="@+id/btn_calendar_next"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:background="@color/color_right"
+            android:background="@color/primary"
             android:gravity="center"
             android:text="NEXT"
             android:textColor="@color/white"/>
